@@ -14,36 +14,51 @@ Asagidaki sorulardan K ve C ile cozulmesini istediklerimizin cozumlerini (komut 
 4- Tablolar arasindaki en az 5 iliskiyi yazin.(Hangi tablolar arasinda ne tur bir iliski var)
 
 4- ER modeldeki tablolardan 3 tanesini M olusturun.
+
 5- ER modeldeki tablolardan 3 tanesini K olusturun.
+
 6- ER modeldeki tablolardan 3 tanesini C olusturun.
 
 (Bu asamada toblolar arasindaki iliskileri gozardi edebilirsiniz. Tum kolonlari girmek zorunda degilsiniz, en az 2 kolon olmasi yeterli.)
 
 7- Olusturdugunuz 3 tabloya M ile 5 veri girisi yapin.
+
 8- Olusturdugunuz 3 tabloya K ile 5 veri girisi yapin.
+
 9- Olusturdugunuz 3 tabloya C ile 5 veri girisi yapin.
 
 10- 3 tablodaki birer veriyi M ile degistirin.
+
 11- 3 tablodaki birer veriyi K ile degistirin.
+
 12- 3 tablodaki birer veriyi C ile degistirin.
 
 13- 3 tablonun son satirini M ile silin.
+
 14- 3 tablonun son satirini K ile silin.
+
 15- 3 tablonun son satirini C ile silin.
 
 16- 1 tabloyu M ile silin.
+
 17- 1 tabloyu K ile silin.
+
 18- 1 tabloyu C ile silin.
 
 19- Kalan tablolardan 1 tanesinin 2 veya 3 sutununu K ile baska bir tablo olarak olusturun.
+
 20- Kalan tablolardan 1 tanesinin 2 veya 3 sutununu C ile baska bir tablo olarak olusturun.
 
 21- Tablolardan 1 tanesini M ile truncate edin.
+
 22- Tablolardan 1 tanesini K ile truncate edin.
+
 23- Tablolardan 1 tanesini C ile truncate edin.
 
 24- Truncate edilmis tablolari M ile silin.
+
 25- 2 tabloyu K ile silin.
+
 26- 2 tabloyu C ile silin.
 
 27- Elimizde veri olan 1 tablo kalmis olmasi lazim. Bu tabloyu csv olarak bilgisayariniza yukleyin.
