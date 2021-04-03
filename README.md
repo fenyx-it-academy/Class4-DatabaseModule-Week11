@@ -9,9 +9,7 @@ Asagidaki sorulardan K ve C ile cozulmesini istediklerimizin cozumlerini (komut 
 
 2-  'class4' database olusturun (M). Database silin (M). Ayni database yine olusturun (K)
 
-3- https://www.postgresqltutorial.com/postgresql-sample-database/ adresine gidin ve ER modeli inceleyin.
-
-4- Tablolar arasindaki en az 5 iliskiyi yazin.(Hangi tablolar arasinda ne tur bir iliski var)
+3- https://www.postgresqltutorial.com/postgresql-sample-database/ adresine gidin ve ER modeli inceleyin. Tablolar arasindaki en az 5 iliskiyi yazin.(Hangi tablolar arasinda ne tur bir iliski var)
 
 4- ER modeldeki tablolardan 3 tanesini M olusturun.
 
@@ -19,7 +17,7 @@ Asagidaki sorulardan K ve C ile cozulmesini istediklerimizin cozumlerini (komut 
 
 6- ER modeldeki tablolardan 3 tanesini C olusturun.
 
-(Bu asamada toblolar arasindaki iliskileri gozardi edebilirsiniz. Tum kolonlari girmek zorunda degilsiniz, en az 2 kolon olmasi yeterli.)
+(4-5-6. sorulari cozerken toblolar arasindaki iliskileri gozardi edebilirsiniz. Tum kolonlari girmek zorunda degilsiniz, en az 2 kolon olmasi yeterli.)
 
 7- Olusturdugunuz 3 tabloya M ile 5 veri girisi yapin.
 
