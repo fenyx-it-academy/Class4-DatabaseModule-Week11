@@ -308,6 +308,8 @@ select email from customer where customer_id in (select customer_id from payment
 select first_name, last_name from staff where address_id in (select address_id from address where district like 'Mos%') union select first_name, last_name from customer where address_id in (select address_id from address where district like 'Mos%')
 
 40- En az kiralanan 5 film hangisidir?
+create table new as select inventory.inventory_id, inventory.film_id, rental.rental_id from inventory right join rental on inventory.inventory_id=rental.inventory_id 
+select film_id, count(inventory_id) from new group by film_id  order by count(film_id) asc limit 5
 
 41- 2006 yilinda yayinlanan ingilizce filmler hangileridir?
 select title from film where release_year=2006 and language_id in (select language_id from language where name='English')
