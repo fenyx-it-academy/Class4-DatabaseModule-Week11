@@ -1,0 +1,80 @@
+34-
+SELECT AVG(length)
+FROM film where (description) like '%Action%';
+
+35-
+SELECT
+store_id,
+count (store_id)
+FROM
+staff
+GROUP BY
+store_id
+ORDER BY
+count (store_id) DESC
+limit 1
+
+36-
+SELECT
+film_id,
+rating
+FROM
+film
+WHERE
+film_id IN (
+SELECT
+film_actor.film_id
+FROM
+film_actor
+WHERE
+actor_id = (select (actor_id) from actor
+where (first_name)='Gene' and (last_name)='Willis')
+);
+
+37-
+select count (*) from customer
+where active = 1
+
+38-
+select title from film
+where title like 'C%
+
+39-
+SELECT
+email
+FROM
+customer
+WHERE
+customer_id IN (
+SELECT
+payment.customer_id
+FROM
+payment
+WHERE
+amount < 4
+);
+
+40-
+select first_name, last_name
+from customer
+where address_id = (select address_id from address where city_id = (select city_id from city where city = 'Moscow'))
+union
+select first_name, last_name
+from staff
+where address_id = (select address_id from address where city_id = (select city_id from city where city = 'Moscow'))
+
+41-
+create table yeni as (SELECT film_id, inventory_id
+FROM inventory
+RIGHT JOIN rental USING (inventory_id))
+SELECT
+film_id,
+count (inventory_id)
+FROM
+yeni
+GROUP BY
+film_id
+ORDER BY
+count (film_id) DESC
+limit 5
+
