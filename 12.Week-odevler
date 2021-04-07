@@ -1,0 +1,576 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "SyntaxError",
+     "evalue": "invalid syntax (<ipython-input-3-21e7a20a6720>, line 1)",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;36m  File \u001b[1;32m\"<ipython-input-3-21e7a20a6720>\"\u001b[1;36m, line \u001b[1;32m1\u001b[0m\n\u001b[1;33m    1- 'pycoders' isimli bir server kurun. (M)\u001b[0m\n\u001b[1;37m                  ^\u001b[0m\n\u001b[1;31mSyntaxError\u001b[0m\u001b[1;31m:\u001b[0m invalid syntax\n"
+     ]
+    }
+   ],
+   "source": [
+    "1- 'pycoders' isimli bir server kurun. (M)\n",
+    "\n",
+    "Cevap:Oncelikle servers yazan kisima geliriz mause ile sag tiklariz ve ardindan Create ile acilan pencereden General kismina\n",
+    "      serverin adini yazariz'pycoders',Connetion kismindan name yazip Password kismina da sifremizi yazip Save diyerek yeni \n",
+    "      Server mizi kayit etmis oluruz.\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "3- https://www.postgresqltutorial.com/postgresql-sample-database/ adresine gidin ve ER modeli inceleyin. \n",
+    "   Tablolar arasindaki en az 5 iliskiyi yazin.(Hangi tablolar arasinda ne tur bir iliski var)\n",
+    "\n",
+    "  Cevap: 1- Aktor Tablosu ile Film_actor tablosu arasinda actor ID bilgisi ortak dolayisi ile birbirinden veri almaktadir.\n",
+    "         2-film_category tablosu hem filimler hem de category tablosu ile baglantili.\n",
+    "         3-Magaza tablosu ile Personel tablosu arasinda yonetici bilgisi kismi ortak.\n",
+    "         4-Magaza ile sehir tablosu arasinda adres verileri ortak.\n",
+    "         5-Adres ile ulkeler tablolarindaki bilgiler ortak.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "5- ER modeldeki tablolardan 3 tanesini K olusturun.\n",
+    " \n",
+    "    Cevap:\n",
+    "        create table category\t\t\n",
+    "        (\n",
+    "            category_id integer primary key,\t\t\n",
+    "            name varchar(15) NOT NULL,\t\t\n",
+    "            last_update NOT NULL,\t\t\n",
+    "            \n",
+    "         )\t\t\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "6- ER modeldeki tablolardan 3 tanesini C olusturun.\n",
+    "\n",
+    "    Cevap:\n",
+    "import psycopg2\n",
+    "\n",
+    "conn = psycopg2.connect(\"dbname=class4 user=postgres password=ft071674\")\n",
+    "cur = conn.cursor()\n",
+    "command = '''create table urun\n",
+    "(\n",
+    "    id integer primary key,\n",
+    "    ad varchar(15) NOT NULL,\n",
+    "    marka varchar(20) NOT NULL,\n",
+    "    stok integer,\n",
+    "    kategori varchar(15)\n",
+    ")'''\n",
+    "#create a table\n",
+    "cur.execute(command)\n",
+    "# close communication with the PostgreSQL database server\n",
+    "cur.close()\n",
+    "# commit the changes\n",
+    "conn.commit()\n",
+    "# close the connection\n",
+    "conn.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "ModuleNotFoundError",
+     "evalue": "No module named 'psycopg2'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+      "\u001b[1;32m<ipython-input-5-c9032b95d18c>\u001b[0m in \u001b[0;36m<module>\u001b[1;34m\u001b[0m\n\u001b[1;32m----> 1\u001b[1;33m \u001b[1;32mimport\u001b[0m \u001b[0mpsycopg2\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0m\u001b[0;32m      2\u001b[0m \u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m      3\u001b[0m \u001b[0mconn\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mpsycopg2\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mconnect\u001b[0m\u001b[1;33m(\u001b[0m\u001b[1;34m\"dbname=class4 user=postgres password=ft071674\"\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m      4\u001b[0m \u001b[0mcur\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mconn\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mcursor\u001b[0m\u001b[1;33m(\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m      5\u001b[0m command = '''create table uru\n",
+      "\u001b[1;31mModuleNotFoundError\u001b[0m: No module named 'psycopg2'"
+     ]
+    }
+   ],
+   "source": [
+    "import psycopg2\n",
+    "\n",
+    "conn = psycopg2.connect(\"dbname=class4 user=postgres password=ft071674\")\n",
+    "cur = conn.cursor()\n",
+    "command = '''create table urun\n",
+    "(\n",
+    "    id integer primary key,\n",
+    "    ad varchar(15) NOT NULL,\n",
+    "    marka varchar(20) NOT NULL,\n",
+    "    stok integer,\n",
+    "    kategori varchar(15)\n",
+    ")'''\n",
+    "#create a table\n",
+    "cur.execute(command)\n",
+    "# close communication with the PostgreSQL database server\n",
+    "cur.close()\n",
+    "# commit the changes\n",
+    "conn.commit()\n",
+    "# close the connection\n",
+    "conn.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "8- Olusturdugunuz 3 tabloya K ile 5 veri girisi yapin.\n",
+    "\n",
+    " Cevap : INSERT INTO catagory Values (6,'dram','a') diyerek bu kodu cogaltarak 5 veri girisi yapariz."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "9- Olusturdugunuz 3 tabloya C ile 5 veri girisi yapin.\n",
+    " \n",
+    "    Cevap:\n",
+    "        \n",
+    "import psycopg2\n",
+    "\n",
+    "conn = psycopg2.connect(\"dbname=class4 user=postgres password=ft071674\")\n",
+    "cur = conn.cursor()\n",
+    "cur.execute('INSERT INTO catagory VALUES (%s,%s,%s)',(7,'Turk','a'))\n",
+    "# close communication with the PostgreSQL database server\n",
+    "cur.close()\n",
+    "# commit the changes\n",
+    "conn.commit()\n",
+    "# close the connection\n",
+    "conn.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "11- 3 tablodaki birer veriyi K ile degistirin.\n",
+    "\n",
+    "   Cevap: update catagory set last_update='z' where catagory_id=4"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "ModuleNotFoundError",
+     "evalue": "No module named 'psycopg2'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+      "\u001b[1;32m<ipython-input-7-28e16f0d7bb3>\u001b[0m in \u001b[0;36m<module>\u001b[1;34m\u001b[0m\n\u001b[0;32m      3\u001b[0m \u001b[1;31m#  Cevap:\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m      4\u001b[0m \u001b[1;33m\u001b[0m\u001b[0m\n\u001b[1;32m----> 5\u001b[1;33m \u001b[1;32mimport\u001b[0m \u001b[0mpsycopg2\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0m\u001b[0;32m      6\u001b[0m \u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m      7\u001b[0m \u001b[0mconn\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mpsycopg2\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mconnect\u001b[0m\u001b[1;33m(\u001b[0m\u001b[1;34m\"dbname=class4 user=postgres password=ft071674\"\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n",
+      "\u001b[1;31mModuleNotFoundError\u001b[0m: No module named 'psycopg2'"
+     ]
+    }
+   ],
+   "source": [
+    "12- 3 tablodaki birer veriyi C ile degistirin.\n",
+    "\n",
+    " Cevap: \n",
+    "\n",
+    "import psycopg2\n",
+    "\n",
+    "conn = psycopg2.connect(\"dbname=class4 user=postgres password=ft071674\")\n",
+    "cur = conn.cursor()\n",
+    "cur.execute('update catagory set last_update= %s where catagory_id=%s',('x',3))\n",
+    "# close communication with the PostgreSQL database server\n",
+    "cur.close()\n",
+    "# commit the changes\n",
+    "conn.commit()\n",
+    "# close the connection\n",
+    "conn.close()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "14- 3 tablonun son satirini K ile silin.\n",
+    "\n",
+    " Cevap:Assagidaki komut ile 7.siradaki veriyi silebiliriz.\n",
+    "        \n",
+    "        delete from catagory where catagory_id=7"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "15- 3 tablonun son satirini C ile silin.\n",
+    "\n",
+    "    Cevap: Assagidaki komut ile 6.siradaki veriyi silebiliriz.\n",
+    "        \n",
+    "        import psycopg2\n",
+    "\n",
+    "conn = psycopg2.connect(\"dbname=class4 user=postgres password=ft071674\")\n",
+    "cur = conn.cursor()\n",
+    "cur.execute('delete from catagory where catagory_id=%s',(6,))\n",
+    "# close communication with the PostgreSQL database server\n",
+    "cur.close()\n",
+    "# commit the changes\n",
+    "conn.commit()\n",
+    "# close the connection\n",
+    "conn.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "17- 1 tabloyu K ile silin.\n",
+    "\n",
+    "    Cevap:Assagidaki kod ile tablomuzu silebiliriz.\n",
+    "        drop table film_catagory"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "18- 1 tabloyu C ile silin.\n",
+    "    \n",
+    "    Cevap: \n",
+    "        import psycopg2\n",
+    "\n",
+    "conn = psycopg2.connect(\"dbname=class4 user=postgres password=ft071674\")\n",
+    "cur = conn.cursor()\n",
+    "cur.execute('drop table film_catagory')\n",
+    "# close communication with the PostgreSQL database server\n",
+    "cur.close()\n",
+    "# commit the changes\n",
+    "conn.commit()\n",
+    "# close the connection\n",
+    "conn.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "19- Kalan tablolardan 1 tanesinin 2 veya 3 sutununu K ile baska bir tablo olarak olusturun.\n",
+    "\n",
+    " Cevap: CREATE TABLE actor_new1 AS SELECT first_name,last_name FROM actor\n",
+    "        "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "20- Kalan tablolardan 1 tanesinin 2 veya 3 sutununu C ile baska bir tablo olarak olusturun.\n",
+    "\n",
+    "import psycopg2\n",
+    "conn = psycopg2.connect(\"dbname = class4 user = postgres password = abc123 \")\n",
+    "cur = conn.cursor()\n",
+    "\n",
+    "cur.execute(\"CREATE TABLE actor_new2 AS SELECT first_name,last_name,last_update FROM actor\")\n",
+    "cur.close()\n",
+    "conn.commit()\n",
+    "conn.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "22- Tablolardan 1 tanesini K ile truncate edin.\n",
+    "\n",
+    "cevap:\n",
+    "    truncate table film_catagory"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "23- Tablolardan 1 tanesini C ile truncate edin.\n",
+    "\n",
+    "cevap:\n",
+    "    \n",
+    "import psycopg2\n",
+    "\n",
+    "conn = psycopg2.connect(\"dbname=class4 user=postgres password=ft071674\")\n",
+    "cur = conn.cursor()\n",
+    "cur.execute('truncate table film_catagory')\n",
+    "# close communication with the PostgreSQL database server\n",
+    "cur.close()\n",
+    "# commit the changes\n",
+    "conn.commit()\n",
+    "# close the connection\n",
+    "conn.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "25- 2 tabloyu K ile silin.\n",
+    "\n",
+    "cevap:\n",
+    "    DROP TABLE film_catagory;"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "26- 2 tabloyu C ile silin.\n",
+    "\n",
+    "cevap:\n",
+    "import psycopg2\n",
+    "\n",
+    "conn = psycopg2.connect(\"dbname=class4 user=postgres password=ft071674\")\n",
+    "cur = conn.cursor()\n",
+    "cur.execute('DROP TABLE film_catagory;')\n",
+    "# close communication with the PostgreSQL database server\n",
+    "cur.close()\n",
+    "# commit the changes\n",
+    "conn.commit()\n",
+    "# close the connection\n",
+    "conn.close()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "27- Elimizde veri olan 1 tablo kalmis olmasi lazim. Bu tabloyu csv olarak bilgisayariniza yukleyin.\n",
+    "\n",
+    "cevap:\n",
+    "    \n",
+    "    sag ust kosedeki indir putonundan olusturdum"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "28- Postgresql arayuzundeki son tabloyu da K ile silin.\n",
+    "\n",
+    "cevap :\n",
+    "    DROP TABLE film_catagory;"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "30- Import ettiginiz bu tabloyu C ile silin.\n",
+    "cevap:\n",
+    "\n",
+    "import psycopg2\n",
+    "\n",
+    "conn = psycopg2.connect(\"dbname=class4 user=postgres password=ft071674\")\n",
+    "cur = conn.cursor()\n",
+    "cur.execute('DROP TABLE film_catagory;')\n",
+    "# close communication with the PostgreSQL database server\n",
+    "cur.close()\n",
+    "# commit the changes\n",
+    "conn.commit()\n",
+    "# close the connection\n",
+    "conn.close()\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "32- DB nizde 15 adet tablo olmasi lazim. Her tabloyu teker teker goruntuleyin ve kolon isimlerine bakarak, 5 tabloda hangi kolonun PK ve FK oldugunu yazin.\n",
+    "\n",
+    "\n",
+    "address table:  PK=address_id   FK=city_id\n",
+    "city table:     PK=city_id      FK=country_id\n",
+    "customer table: PK=customer_id  FK=store_id\n",
+    "payment table:  PK=payment_id   FK=customer_id\n",
+    "rental table:   PK=rental_id    FK=inventory_id\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "33- Action filmlerinin ortalama suresi ne kadar?\n",
+    "\n",
+    "select avg(length) from film where film_id in\n",
+    "(\n",
+    "\tselect film_id from film_category\n",
+    "\twhere category_id=1\n",
+    ")\n",
+    "\n",
+    "CIKTI:111.6093750000000000"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "35- 'Gene Willis' adli actorun oynadigi filmlerin ratingi nedir?\n",
+    "select rating from film where film_id in \n",
+    "(\n",
+    "    select film_id from film_actor where actor_id = (select actor_id from actor where first_name='Gene' and \n",
+    "    last_name='Willis'\n",
+    "))\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "36- Aktif customer sayisi nedir?\n",
+    "\n",
+    "select count(*) from customer where active=1\n",
+    "\n",
+    "cikti: 584"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "37- 'C' harfiyle baslayan filmler hangileridir?\n",
+    "select count(*) from film where title like 'C%'\n",
+    "\n",
+    "cikti:92\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "38- 4$ den az odeme yapan musterilerin e-mail edresleri nedir?\n",
+    "\n",
+    "select email from customer where customer_id in \n",
+    "(\n",
+    "\tselect customer_id from payment where amount<4\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "39- Moscow'da ikamet eden staff ve customer tablosu? (sadece isim/soyisim sutunu olsun)\n",
+    "select first_name, last_name from staff where address_id in \n",
+    "(\n",
+    "\tselect address_id from address where district like 'Mos%')\n",
+    "\tunion select first_name, last_name from customer where address_id in\n",
+    "\t(select address_id from address where district like 'Mos%'\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "40- En az kiralanan 5 film hangisidir?\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "41- 2006 yilinda yayinlanan ingilizce filmler hangileridir?\n",
+    "\n",
+    "select title from film where release_year=2006 and language_id in \n",
+    "(select language_id from language where name='English')"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
