@@ -1,0 +1,415 @@
+1- 'pycoders' isimli bir server kurun. (M)
+
+2- 'class4' database olusturun (M). Database silin (M). Ayni database yine olusturun (K:SQL)
+
+CREATE DATABASE class4
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+
+
+3- https://www.postgresqltutorial.com/postgresql-sample-database/ adresine gidin ve ER modeli inceleyin. Tablolar arasindaki en az 5 iliskiyi yazin.
+(Hangi tablolar arasinda ne tur bir iliski var)
+
+a) category ve film_category tablolari arasında ----> one to many / category_id category tablosunda primary key. Fakat film_category tablosunda foreign key'dir.
+b) customer ve rental tabloları arasında ----> one to one / customer_id customer tablosunda primary key. Fakat rental tablosunda foreign key'dir.
+c) film ve language tabloları arasında -----> one to many / language_id language tablosunda primary key.Fakat film tablosunda foreign key'dir.
+d) actor ve film_actor tabloları arasında ----> one to many / actor_id actor tablosunda primary key. Fakat film_actor tablosunda foreign key'dir.
+e) store ve staff arasında ----> one to one / store tablosunda store_id prşmary key. Fakat staff tablosunda foreign key' dir. 
+
+4- ER modeldeki tablolardan 3 tanesini M olusturun.
+
+5- ER modeldeki tablolardan 3 tanesini K olusturun.
+
+CREATE TABLE public.actor
+(
+    actor_id integer NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    last_update time with time zone,
+    PRIMARY KEY (actor_id)
+);
+
+
+CREATE TABLE public.customer
+(
+    customer_id integer NOT NULL,
+    store_id integer NOT NULL,
+    first_name character varying(30) NOT NULL,
+    PRIMARY KEY (customer_id)
+);
+
+
+CREATE TABLE public.city
+(
+    city_id integer NOT NULL,
+    city character varying(30),
+    country_id integer NOT NULL,
+    PRIMARY KEY (city_id)
+);
+
+6- ER modeldeki tablolardan 3 tanesini C olusturun.
+
+(4-5-6. sorulari cozerken toblolar arasindaki iliskileri gozardi edebilirsiniz. Tum kolonlari girmek zorunda degilsiniz, en az 2 kolon olmasi yeterli.)
+
+import psycopg2
+
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456")
+cur = conn.cursor()
+command = '''create table city
+(
+    city_id integer primary key,
+    country varchar(30) NOT NULL,
+    last_update date NOT NULL,
+)'''
+cur.execute(command)
+cur.close()
+conn.commit()
+conn.close()
+
+import psycopg2
+
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456")
+cur = conn.cursor()
+command = '''create table staff (
+    staff_id integer,
+    first_name varchar(30) NOT NULL,
+    last_name varchar(30) NOT NULL,
+    address_id integer NULL,
+    email varchar(50) NOT NULL,
+    )"""
+
+cur.close()
+conn.commit()
+conn.close()
+
+
+import psycopg2
+
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456")
+cur = conn.cursor()
+command = '''create table language (
+    language_id integer primary key,
+    name varchar(30) NOT NULL,
+    last_update date NOT NULL,
+    )"""
+
+cur.close()
+conn.commit()
+conn.close()
+
+
+7- Olusturdugunuz 3 tabloya M ile 5 veri girisi yapin.
+
+8- Olusturdugunuz 3 tabloya K ile 5 veri girisi yapin.
+
+Tablo 1 
+insert into category(customer_id, first_name, last_name, last_update) VALUES (5, 'Hacı', 'Yatmaz', '1-1-2021');
+insert into category(customer_id, first_name, last_name, last_update) VALUES (4, 'Kerimabdulcabbar', 'cabukatlar', '1-1-2021');
+insert into category(customer_id, first_name, last_name, last_update) VALUES (3, 'Niyazi', 'Sırtıkıllı', '1-1-2021');
+insert into category(customer_id, first_name, last_name, last_update) VALUES (2, 'Osman', 'Bostan', '1-1-2021');
+insert into category(customer_id, first_name, last_name, last_update) VALUES (1, 'Kaya', 'Bilir', '1-1-2021');
+
+Tablo 2
+
+insert into country(language_id, name, last_update) VALUES (1, 'English', '2-2-2021');
+insert into country(language_id, name, last_update) VALUES (2, 'Italian', '2-2-2021');
+insert into country(language_id, name, last_update) VALUES (3, 'Japanese', '2-2-2021');
+insert into country(language_id, name, last_update) VALUES (4, 'Mandarin', '2-2-2021');
+insert into country(language_id, name, last_update) VALUES (5, 'French', '2-2-2021');
+
+Tablo 3
+
+insert into payment(payment_id, payment_date, rental_id) VALUES (1, '3-3-2021', 5)
+insert into payment(payment_id, payment_date, rental_id) VALUES (2, '3-3-2021', 4)
+insert into payment(payment_id, payment_date, rental_id) VALUES (3, '3-3-2021', 3)
+insert into payment(payment_id, payment_date, rental_id) VALUES (4, '3-3-2021', 2)
+insert into payment(payment_id, payment_date, rental_id) VALUES (5, '3-3-2021', 1)
+
+
+9- Olusturdugunuz 3 tabloya C ile 5 veri girisi yapin.
+
+import psycopg2
+
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456")
+cur = conn.cursor()
+cur.execute(
+'''insert into city(city_id, city, country_id, last_update)
+VALUES
+    (1, 'Ankara', 2, '2-2-2021'),
+    (2, 'istanbul', 3, '2-2-2021'),
+    (3, 'Adana', 5, '2-2-2021'),
+    (4, 'Bursa', 4, '2-2-2021'),
+    (5, 'Edirne', 1, '2-2-2021')
+	
+'''
+)
+
+cur.close()
+conn.commit()
+conn.close()
+
+
+import psycopg2 
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456") 
+cur = conn.cursor() 
+cur.execute( 
+""" insert into film_category(film_id, category_id, last_update) 
+VALUES 
+    ('5', '4', '1-4-2021'), 
+    ('4', '2', '1-4-2021'), 
+    ('3', '3', '1-4-2021'), 
+    ('2', '5', '1-4-2021'), 
+    ('1', '2', '1-4-2021') 
+""" 
+) 
+
+cur.close() 
+conn.commit() 
+conn.close()
+
+
+import psycopg2 
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456") 
+cur = conn.cursor() 
+cur.execute( 
+""" insert into category(category_id, name, last_update) 
+VALUES 
+    ('8', 'Family', '1-4-2021'), 
+    ('2', 'Animation', '1-4-2021'), 
+    ('10', 'Games', '1-4-2021'), 
+    ('5', 'Comedy', '1-4-2021'), 
+    ('16', 'Travel', '1-4-2021') 
+""" 
+) 
+cur.close() 
+conn.commit() 
+conn.close()
+
+
+10- 3 tablodaki birer veriyi M ile degistirin.
+
+11- 3 tablodaki birer veriyi K ile degistirin.
+
+update city set city='izmir' where city_id=5;
+update language SET last_update = '6-4-2021' where language_id = 6
+update actor set last_update='04/04/2021' where actor_id=3;
+
+12- 3 tablodaki birer veriyi C ile degistirin.
+
+import psycopg2
+
+conn = psycopg2.connect(
+    "dbname=class4 user=postgres password=asd123456")
+
+cur = conn.cursor()
+
+command_staff = """ UPDATE staff
+                SET last_name = %s
+                WHERE staff_id = %s"""
+
+command_payment = """UPDATE payment
+                SET amount = %s
+                WHERE payment_id = %s"""
+
+command_payment = """UPDATE inventory
+                SET store_id = %s
+                WHERE inventory_id = %s"""
+
+cur.execute(command_staff, ('Bolic', 1))
+cur.execute(command_payment, (100, 1))
+cur.execute(command_staff, (1, 2))
+
+cur.close()
+conn.commit()
+conn.close()
+
+13- 3 tablonun son satirini M ile silin.
+
+14- 3 tablonun son satirini K ile silin.
+
+DELETE FROM film_category WHERE film_id=1000;
+DELETE FROM rental WHERE rental_id=1;
+DELETE FROM payment WHERE payment_id=32098;
+
+15- 3 tablonun son satirini C ile silin.
+
+import psycopg2 
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456") 
+cur = conn.cursor() 
+cur.execute( 
+""" DELETE FROM film_category WHERE film_id = ( SELECT MAX (film_id) FROM film );""" ) 
+cur.close() 
+conn.commit() 
+conn.close()
+
+
+import psycopg2 
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456") 
+cur = conn.cursor() 
+cur.execute( 
+""" DELETE FROM language WHERE language_id = (SELECT MAX (language_id) FROM language);""" ) 
+cur.close() 
+conn.commit() 
+conn.close()
+
+
+import psycopg2 
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456") 
+cur = conn.cursor() 
+cur.execute( 
+""" DELETE FROM customer WHERE customer_id = (SELECT MAX (customer_id) FROM customer);""" ) 
+cur.close() 
+conn.commit() 
+conn.close()
+
+
+
+16- 1 tabloyu M ile silin.
+
+17- 1 tabloyu K ile silin.
+drop table store;
+
+18- 1 tabloyu C ile silin.
+
+import psycopg2 
+
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456") 
+cur = conn.cursor() cur.execute( """ drop table staff""" ) 
+cur.close() 
+conn.commit() 
+conn.close()
+
+19- Kalan tablolardan 1 tanesinin 2 veya 3 sutununu K ile baska bir tablo olarak olusturun.
+
+create table new_table as Select( first_name), (last_name) from staff
+
+20- Kalan tablolardan 1 tanesinin 2 veya 3 sutununu C ile baska bir tablo olarak olusturun.
+
+import psycopg2 
+
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456") 
+cur = conn.cursor() cur.execute( """ create table customer_full_names AS select first_name, last_name from customer;""" ) 
+cur.close() 
+conn.commit() 
+conn.close()
+
+21- Tablolardan 1 tanesini M ile truncate edin.
+
+22- Tablolardan 1 tanesini K ile truncate edin.
+
+TRUNCATE customer_full_names
+
+23- Tablolardan 1 tanesini C ile truncate edin.
+
+import psycopg2
+
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456")
+cur = conn.cursor()
+cur.execute(""" Truncate store;""")
+cur.close()
+conn.commit()
+conn.close()
+
+24- Truncate edilmis tablolari M ile silin.
+
+25- 2 tabloyu K ile silin.
+
+drop table store
+drop table staff
+
+26- 2 tabloyu C ile silin.
+
+import psycopg2
+
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456")
+cur = conn.cursor()
+cur.execute(""" drop table customer_full_names;""")
+cur.close()
+conn.commit()
+conn.close()
+
+import psycopg2
+
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456")
+cur = conn.cursor()
+cur.execute(""" drop table film_new;""")
+cur.close()
+conn.commit()
+conn.close()
+
+
+27- Elimizde veri olan 1 tablo kalmis olmasi lazim. Bu tabloyu csv olarak bilgisayariniza yukleyin.
+
+28- Postgresql arayuzundeki son tabloyu da K ile silin.
+
+drop table actor;
+
+29- Bilgisayarinizdaki csv yi arayuze import edin.
+
+30- Import ettiginiz bu tabloyu C ile silin.
+
+import psycopg2
+
+conn = psycopg2.connect("dbname=class4 user=postgres password=asd123456")
+cur = conn.cursor()
+cur.execute(""" drop table actor;""")
+cur.close()
+conn.commit()
+conn.close()
+
+31- https://www.postgresqltutorial.com/postgresql-sample-database/ linkindeki ornek DB yi bilgisayariniza indirin ve arayuze yukleyin.
+
+32- DB nizde 15 adet tablo olmasi lazim. Her tabloyu teker teker goruntuleyin ve kolon isimlerine bakarak, 5 tabloda hangi kolonun PK ve FK oldugunu yazin.
+
+a-customer table PK: customer_id  FK: customer address_id
+b-actor table PK: actor_id
+c-category table PK: category_id
+d-rental table PK: rental_id FK: customer_id
+e-address table PK: address_id FK: city_id
+
+Sorgular? (Asagidaki sorularin cevaplarini ve bu cevabi bulurken kullandiginiz kodlari yazin)
+
+33- Action filmlerinin ortalama suresi ne kadar?
+
+select avg(length) from film
+left join film_category on film.film_id=film_category.film_id
+left join category on category.category_id=film_category.category_id
+where name='Action'
+
+34- En cok staff olan store hangisidir?
+select count(*) from staff
+group by store_id
+order by count(*) DESC limit 1
+
+35- 'Gene Willis' adli actorun oynadigi filmlerin ratingi nedir?
+
+select film_id, rating from film
+where film_id in ((select film_id from film where film_id=(select actor_id from actor where first_name='Gene' and last_name='Willis')))
+
+36- Aktif customer sayisi nedir?
+
+select count(*) from customer
+where active = 1
+
+37- 'C' harfiyle baslayan filmler hangileridir?
+
+select title from film where title like 'C%'
+
+38- 4$ den az odeme yapan musterilerin e-mail edresleri nedir?
+
+SELECT email FROM customer WHERE customer_id IN (SELECT payment.customer_id FROM payment WHERE amount < 4);
+
+39- Moscow'da ikamet eden staff ve customer tablosu? (sadece isim/soyisim sutunu olsun)
+
+select * from customer 
+left join address on customer.address_id=address.address_id
+
+40- En az kiralanan 5 film hangisidir?
+
+41- 2006 yilinda yayinlanan ingilizce filmler hangileridir?
+
+select * from film
+left join language on film.language_id=language.language_id
+where release_year = 2006 and name = 'English'
